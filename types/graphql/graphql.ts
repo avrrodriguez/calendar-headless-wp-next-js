@@ -27,3 +27,11 @@ export type LinksPage = {
   title: string,
   uri: string
 }
+
+export type Event = {
+  eventType: string,
+  eventName: string,
+  eventStartDate: string,
+  eventEndDate: string
+  eventDescription: string
+}
