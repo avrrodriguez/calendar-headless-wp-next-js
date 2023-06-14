@@ -35,17 +35,13 @@ export default function Home({ posts }: typeOfPost): JSX.Element {
 
 export async function getStaticProps() {
   const GET_POSTS = gql`
-    query GetBlogPosts {
+    query GetCalendarEvents {
       category(id: "blog_post", idType: NAME) {
-        slug
-        uri
-        contentNodes {
+        posts {
           nodes {
-            ... on Post {
-              title
-              uri
-              content
-            }
+            uri
+            title
+            content
           }
         }
       }
@@ -55,7 +51,7 @@ export async function getStaticProps() {
   const response = await client.query({
     query: GET_POSTS,
   });
-  const posts = response?.data?.category?.contentNodes?.nodes;
+  const posts = response?.data?.category?.posts?.nodes;
   return {
     props: {
       posts,

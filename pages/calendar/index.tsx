@@ -1,14 +1,15 @@
 import { Event } from "types/graphql/graphql"
+import Calendar from "components/Calendar"
 
 type EventType = {
   events: Event
 }
 
-export default function Calendar({ events }: EventType): JSX.Element {
+export default function CalendarPage({ events }: EventType): JSX.Element {
 
   return (
     <div>
-      <h1>This is the calendar page</h1>
+      <Calendar></Calendar>
     </div>
   )
 }
