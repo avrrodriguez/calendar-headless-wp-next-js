@@ -1,5 +1,6 @@
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 import { Event } from "types/graphql/graphql"
+import { useEffect } from "react"
 
 type TypeOfEvent = {
   events: Event
@@ -9,6 +10,10 @@ export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
   const date: Date = new Date("05/05/2023")
   const dayName: String[] = ["Sunday", "Monday", "Tuesday", "Wedsnesday", "Thursday", "Friday", "Saturday"]
   console.log(dayName[date.getDay()])
+
+  useEffect(() => {
+    var calendarDay = document.getElementById("col-0-row-0");
+  })
 
   return (
     <div>
