@@ -1,15 +1,17 @@
-import { responsePathAsArray } from "graphql"
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
-import Header from "./Header"
+import { Event } from "types/graphql/graphql"
 
-export default function Calendar(): JSX.Element {
+type TypeOfEvent = {
+  events: Event
+}
 
+export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
+  const date: Date = new Date("05/05/2023")
+  const dayName: String[] = ["Sunday", "Monday", "Tuesday", "Wedsnesday", "Thursday", "Friday", "Saturday"]
+  console.log(dayName[date.getDay()])
 
   return (
-    <div style={{backgroundColor: "#967bb6", height: "100vh"}}>
-        <div className="calendar-header" style={{display: "flex", justifyContent: "center"}}>
-          <h1>Calendar</h1>
-        </div>
+    <div>
         <div className="weekdays" style={{display:"grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
           <div>Sunday</div>
           <div>Monday</div>

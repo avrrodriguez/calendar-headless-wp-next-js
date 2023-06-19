@@ -1,4 +1,4 @@
-export default function Event() {
+export default function EventPage() {
   return (
     <div>
       <h1>
