@@ -8,7 +8,7 @@ type TypeOfEvent = {
 
 export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
   const date: Date = new Date("05/05/2023")
-  const dayName: String[] = ["Sunday", "Monday", "Tuesday", "Wedsnesday", "Thursday", "Friday", "Saturday"]
+  const dayName: String[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   console.log(dayName[date.getDay()])
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
           <div>Monday</div>
           <div>Tuesday</div>
           <div>Wednesday</div>
-          <div>Thrusday</div>
+          <div>Thursday</div>
           <div>Friday</div>
           <div>Saturday</div>
         </div>
