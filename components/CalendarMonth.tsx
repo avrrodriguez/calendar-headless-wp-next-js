@@ -7,13 +7,29 @@ type TypeOfEvent = {
 }
 
 export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
-  const date: Date = new Date("05/05/2023")
-  const dayName: String[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  console.log(dayName[date.getDay()])
+  const date: Date = new Date("June 1, 2023")
+  const startMonthDay: Number = date.getDay()
+  var endMonthDay = GetCalendarMonthDays("june")
+  var day = 1
 
-  useEffect(() => {
-    var calendarDay = document.getElementById("col-0-row-0");
-  })
+  function CalendarDays() {
+    [...Array(5).keys()].map((row) => {
+      [...Array(7).keys()].map((col)=>{
+        if (day <= endMonthDay) {
+
+          if((col >= startMonthDay && row == 0) || row > 0) {
+            document.getElementById(`col-${col}-row-${row}`).innerText = day.toString()
+            day = day + 1
+          } else {
+            document.getElementById(`col-${col}-row-${row}`).style.backgroundColor = "gray"
+          }
+
+        }
+      })
+    })
+  }
+
+  useEffect(() => {CalendarDays()})
 
   return (
     <div>
@@ -26,7 +42,7 @@ export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
           <div>Friday</div>
           <div>Saturday</div>
         </div>
-        <div className="calendar-days" style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
+        <div className="calendar-boxes" style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
         {
           [...Array(7).keys()].map((col) => {
             return(
@@ -53,6 +69,7 @@ export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
           })
         }
         </div>
+
     </div>
   )
   }
