@@ -1,8 +1,12 @@
 import CalendarMonth from "./CalendarMonth"
 import { Event } from "types/graphql/graphql";
+import { dateMonthYear } from "types/graphql/graphql";
 
 export default function CalendarAllMonths() {
-  const month = "june";
+  const dateMonthYear: dateMonthYear = {
+    month: "June",
+    year: "2023"
+  }
 
   let anEvent: Event = {
     eventType: "holiday",
@@ -17,7 +21,7 @@ export default function CalendarAllMonths() {
         <div className="calendar-header" style={{display: "flex", justifyContent: "center"}}>
           <h1>Calendar</h1>
         </div>
-        <CalendarMonth events={anEvent}></CalendarMonth>;
+        <CalendarMonth month={dateMonthYear.month} year={dateMonthYear.year}></CalendarMonth>;
     </div>
   )
 }

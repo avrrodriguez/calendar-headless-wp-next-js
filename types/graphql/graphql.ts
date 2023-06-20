@@ -35,3 +35,8 @@ export type Event = {
   eventEndDate: string
   eventDescription: string
 }
+
+export type dateMonthYear = {
+  month: String,
+  year: String
+}

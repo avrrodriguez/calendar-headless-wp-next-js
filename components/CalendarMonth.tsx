@@ -1,12 +1,14 @@
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
-import { Event } from "types/graphql/graphql"
 import { useEffect } from "react"
+import { dateMonthYear } from "types/graphql/graphql"
 
-type TypeOfEvent = {
-  events: Event
+type typeOfMonthYear = {
+  monthYear: dateMonthYear
 }
 
-export default function CalendarMonth({ events }: TypeOfEvent): JSX.Element {
+export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Element {
+  console.log(month)
+  console.log(year)
   const date: Date = new Date("June 1, 2023")
   const startMonthDay: Number = date.getDay()
   var endMonthDay = GetCalendarMonthDays("june")
