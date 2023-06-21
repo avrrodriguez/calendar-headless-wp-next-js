@@ -8,7 +8,6 @@ type typeOfCalendarDayd = {
 }
 
 export function SetCalendarDays({ calendarDayId, month, year }: typeOfCalendarDayd): JSX.Element {
-  console.log(calendarDayId)
   const date: Date = new Date(`${month} 1, ${year}`)
   const startMonthDay: Number = date.getDay()
   var endMonthDay = GetCalendarMonthDays(`${month}`)
