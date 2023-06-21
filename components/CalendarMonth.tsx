@@ -2,6 +2,8 @@ import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 import { useEffect } from "react"
 import { dateMonthYear } from "types/graphql/graphql"
 import { Event } from "types/graphql/graphql";
+import { WeekDays } from "./WeekDays";
+import { CalendarDays } from "./CalendarDays";
 
 export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Element {
   const date: Date = new Date(`${month} 1, ${year}`)
@@ -17,7 +19,7 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
     eventDescription: "An even that celebrates something"
   }
 
-  function CalendarDays(): void {
+  function CalendarDay(): void {
     [...Array(6).keys()].map((row) => {
       [...Array(7).keys()].map((col)=>{
           if(((col >= startMonthDay && row == 0) || row > 0) && day <= endMonthDay) {
@@ -30,21 +32,15 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
     })
   }
 
+  // make a separate component calendarday in which the id of the day div (col-#-row-#) gets passed, do everything there
+
   function addEvents(event: Event): void {}
 
-  useEffect(() => {CalendarDays()})
+  useEffect(() => {CalendarDay()})
 
   return (
     <div>
-        <div className="weekdays" style={{display:"grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
-          <div>Sunday</div>
-          <div>Monday</div>
-          <div>Tuesday</div>
-          <div>Wednesday</div>
-          <div>Thursday</div>
-          <div>Friday</div>
-          <div>Saturday</div>
-        </div>
+        <WeekDays></WeekDays>
         <div className="calendar-boxes" style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
         {
           [...Array(7).keys()].map((col) => {
@@ -63,7 +59,9 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
                       }} 
                       id={`col-${col}-row-${row}`} 
                       key={`col-${col}-row-${row}`}
-                      ></div>
+                      >
+                        <CalendarDays calendarDayId={`col-${col}-row-${row}`} ></CalendarDays>
+                      </div>
                     )
                   })
                  } 
