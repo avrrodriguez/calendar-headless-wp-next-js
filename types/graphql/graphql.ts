@@ -32,8 +32,10 @@ export type Event = {
   eventType: string,
   eventName: string,
   eventStartDate: string,
-  eventEndDate: string
-  eventDescription: string
+  eventEndDate: string,
+  eventDescription: string,
+  uri: String,
+  title: String
 }
 
 export type dateMonthYear = {

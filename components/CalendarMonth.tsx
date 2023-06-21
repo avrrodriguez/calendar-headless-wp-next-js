@@ -26,7 +26,10 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
                       id={`col-${col}-row-${row}`} 
                       key={`col-${col}-row-${row}`}
                       > 
-                      <SetCalendarDays calendarDayId={`col-${col}-row-${row}`} month={month} year={year}></SetCalendarDays>
+                        <SetCalendarDays 
+                          month={month} 
+                          year={year}
+                        ></SetCalendarDays>
                       
                       </div>
                     )
