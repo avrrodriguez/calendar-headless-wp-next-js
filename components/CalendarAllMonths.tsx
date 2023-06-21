@@ -1,19 +1,10 @@
 import CalendarMonth from "./CalendarMonth"
-import { Event } from "types/graphql/graphql";
 import { dateMonthYear } from "types/graphql/graphql";
 
-export default function CalendarAllMonths() {
+export default function CalendarAllMonths(): JSX.Element {
   const dateMonthYear: dateMonthYear = {
-    month: "June",
+    month: "July",
     year: "2023"
-  }
-
-  let anEvent: Event = {
-    eventType: "holiday",
-    eventName: "Ram",
-    eventStartDate: "05/05/2023",
-    eventEndDate: "05/05/2023",
-    eventDescription: "An even that celebrates something"
   }
 
   return (

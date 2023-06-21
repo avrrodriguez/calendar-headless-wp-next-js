@@ -1,4 +1,4 @@
-export default function EventPage() {
+export default function EventPage(): JSX.Element {
   return (
     <div>
       <h1>

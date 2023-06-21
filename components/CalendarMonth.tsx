@@ -1,35 +1,36 @@
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 import { useEffect } from "react"
 import { dateMonthYear } from "types/graphql/graphql"
-
-type typeOfMonthYear = {
-  monthYear: dateMonthYear
-}
+import { Event } from "types/graphql/graphql";
 
 export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Element {
-  console.log(month)
-  console.log(year)
-  const date: Date = new Date("June 1, 2023")
+  const date: Date = new Date(`${month} 1, ${year}`)
   const startMonthDay: Number = date.getDay()
-  var endMonthDay = GetCalendarMonthDays("june")
+  var endMonthDay = GetCalendarMonthDays(`${month}`)
   var day = 1
 
-  function CalendarDays() {
-    [...Array(5).keys()].map((row) => {
-      [...Array(7).keys()].map((col)=>{
-        if (day <= endMonthDay) {
+  let anEvent: Event = {
+    eventType: "holiday",
+    eventName: "Ram",
+    eventStartDate: "05/05/2023",
+    eventEndDate: "05/05/2023",
+    eventDescription: "An even that celebrates something"
+  }
 
-          if((col >= startMonthDay && row == 0) || row > 0) {
+  function CalendarDays(): void {
+    [...Array(6).keys()].map((row) => {
+      [...Array(7).keys()].map((col)=>{
+          if(((col >= startMonthDay && row == 0) || row > 0) && day <= endMonthDay) {
             document.getElementById(`col-${col}-row-${row}`).innerText = day.toString()
-            day = day + 1
+            day++
           } else {
             document.getElementById(`col-${col}-row-${row}`).style.backgroundColor = "gray"
           }
-
-        }
       })
     })
   }
+
+  function addEvents(event: Event): void {}
 
   useEffect(() => {CalendarDays()})
 
@@ -50,13 +51,13 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
             return(
               <div className="col" style={{display: "grid"}} id={`col-${col}`} key={`col-${col}`}>
                  {
-                  [...Array(5).keys()].map((row)=>{
+                  [...Array(6).keys()].map((row)=>{
                     return(
                       <div 
                       className="row" 
                       style={{
                         border: "2px solid gray", 
-                        height: "115px", 
+                        height: "105px", 
                         width: "110px", 
                         backgroundColor: "white"
                       }} 
