@@ -34,6 +34,13 @@ export type Event = {
   eventStartDate: string,
   eventEndDate: string,
   eventDescription: string,
+}
+
+export type EventType = {
+  event: Event,
+}
+
+export type EventURI = {
   uri: String,
   title: String
 }

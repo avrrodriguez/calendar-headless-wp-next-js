@@ -2,6 +2,7 @@ import CalendarMonth from "./CalendarMonth"
 import { dateMonthYear } from "types/graphql/graphql";
 
 export default function CalendarAllMonths(): JSX.Element {
+
   const dateMonthYear: dateMonthYear = {
     month: "May",
     year: "2023"
