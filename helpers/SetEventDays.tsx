@@ -1,13 +1,11 @@
 export default function SetEventDays(): void {
 
   const eventStartDay: Number = 1
-  const eventEndDay: Number = 3
+  const eventEndDay: Number = 5
   const eventTitle: String = "Holiday"
 
   function handleEventClick(){
-    console.log("click")
     window.location.href = "/calendar/1"
-    console.log(document.URL)
   }
 
   const setEventDays = 

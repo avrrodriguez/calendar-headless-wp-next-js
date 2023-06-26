@@ -11,11 +11,11 @@ type typeOfEventType = {
 
 
 export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.Element {
-  console.log(calendar_posts[0].uri)
-  useEffect(()=>SetEventDays())
+  // console.log(calendar_posts[0].uri)
+  useEffect(()=>SetEventDays(), [])
   return (
     <div>
-      <CalendarAllMonths></CalendarAllMonths>
+      <CalendarAllMonths />
     </div>
   )
 }
@@ -47,8 +47,6 @@ export async function getStaticProps() {
   const response_event = await client.query({
     query: GET_CALENDAR_POSTS,
   });
-
-  console.log(response_event)
 
   const calendar_posts = response_event?.data?.category?.posts?.nodes;
 
