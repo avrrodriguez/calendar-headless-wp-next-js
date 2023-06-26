@@ -1,10 +1,15 @@
 import EventPage from "components/EventPage"
+import { EventType } from "types/graphql/graphql"
 
-export default function SlugPage({ event }: any): JSX.Element {
+type typeOfEvent = {
+  event: EventType[]
+}
+
+export default function SlugPage({ event }: typeOfEvent): JSX.Element {
   return (
     <div>
       <h1>AYOOO</h1>
-      <EventPage></EventPage>
+      {/* <EventPage event={event}></EventPage> */}
     </div>
   )
 } 
