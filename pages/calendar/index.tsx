@@ -1,18 +1,18 @@
 import CalendarAllMonths from "components/CalendarAllMonths"
+import { EventType } from "types/graphql/graphql"
 import { client } from "lib/apollo";
 import { gql } from "@apollo/client";
-import { EventType, EventURI} from "types/graphql/graphql"
+import SetEventDays from "helpers/SetEventDays"
+import { useEffect } from "react"
 
 type typeOfEventType = {
   calendar_posts: EventType[]
 }
 
-export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.Element {
-  if (calendar_posts) {
-    console.log(calendar_posts.length)
-    console.log(calendar_posts[0].event.eventName)
-  }
 
+export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.Element {
+  console.log(calendar_posts[0].uri)
+  useEffect(()=>SetEventDays())
   return (
     <div>
       <CalendarAllMonths></CalendarAllMonths>
@@ -21,7 +21,7 @@ export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.E
 }
 
 export async function getStaticProps() {
-  console.log("here")
+
   // Request for event info
   const GET_CALENDAR_POSTS = gql`
     query GetCalendarPostsByName {
@@ -36,6 +36,8 @@ export async function getStaticProps() {
               eventType
               fieldGroupName
             }
+            uri
+            title
           }
         }
       }
@@ -49,26 +51,6 @@ export async function getStaticProps() {
   console.log(response_event)
 
   const calendar_posts = response_event?.data?.category?.posts?.nodes;
-
-  // Request for calendar posts uri and title
-//   const GET_CALENDAR_POSTS_URI = gql`
-//   query GetCalendarPostsByName {
-//     category(id: "calendar_event", idType: NAME) {
-//       posts {
-//         nodes {
-//           uri
-//           title
-//         }
-//       }
-//     }
-//   }
-// `;
-
-//   const response_uri = await client.query({
-//     query: GET_CALENDAR_POSTS,
-//   });
-
-//   const calendar_posts_uri = response_uri?.data?.category?.posts?.nodes
 
   return {
     props: {

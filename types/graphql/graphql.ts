@@ -15,13 +15,6 @@ export type Post = {
   author: PostAuthor
 }
 
-// export type Form = {
-//   content: string,
-//   date: string,
-//   title: string,
-//   uri: string
-// }
-
 export type LinksPage = {
   constent: string,
   title: string,
@@ -38,9 +31,6 @@ export type Event = {
 
 export type EventType = {
   event: Event,
-}
-
-export type EventURI = {
   uri: String,
   title: String
 }
