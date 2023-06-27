@@ -2,35 +2,33 @@ import EventPage from "components/EventPage"
 import { EventType } from "types/graphql/graphql"
 import { client } from "lib/apollo";
 import { gql } from "@apollo/client";
-import { useEffect } from "react"
 
 type typeOfEvent = {
-  calendar_event: EventType[]
+  calendar_event: EventType
 }
 
 export default function SlugPage({ calendar_event }: typeOfEvent): JSX.Element {
-  useEffect(() => {console.log(document.URL)})
+  console.log(calendar_event.event.eventName)
   return (
     <div>
-      <h1>AYOOO</h1>
-      {/* <EventPage event={event}></EventPage> */}
+      <EventPage calendar_event={calendar_event}></EventPage>
     </div>
   )
 } 
 
 export async function getStaticProps({ params }: any) {
   const GET_POST_BY_URI = gql`
-    query GetPostByURI($id: ID!) {
+    query GetCalendarPostsByURI($id: ID!) {
       post(id: $id, idType: URI) {
         title
-        content
-        date
         uri
-        author {
-          node {
-            firstName
-            lastName
-          }
+        event {
+          eventDescription
+          eventEndDate
+          eventName
+          eventStartDate
+          eventType
+          fieldGroupName
         }
       }
     }
@@ -38,7 +36,7 @@ export async function getStaticProps({ params }: any) {
   const response = await client.query({
     query: GET_POST_BY_URI,
     variables: {
-      id: params.uri,
+      id: params.event,
     },
   });
   const calendar_event = response?.data?.post;

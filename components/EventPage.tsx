@@ -7,12 +7,15 @@ type typeOfEvent = {
 export default function EventPage({ calendar_event }: typeOfEvent): JSX.Element {
   return (
     <div>
-      <h1>
-        Event Title
+      <h1 style={{display:"grid",justifyContent: "center"}}>
+        {calendar_event.event.eventName}
       </h1>
-      <p>
-        Event description
-      </p>
+      <h2>
+        Event Description: 
+        <p style={{display:"grid",justifyContent: "center"}}>
+          {calendar_event.event.eventDescription}
+        </p>
+      </h2>
     </div>
   )
 }
