@@ -1,11 +1,13 @@
-export default function SetEventDays(): void {
+import { EventType } from "types/graphql/graphql"
 
-  const eventStartDay: Number = 1
-  const eventEndDay: Number = 5
-  const eventTitle: String = "Holiday"
+export default function SetEventDays(calendar_post: EventType): void {
+
+  const eventStartDay: Number = parseInt(calendar_post.event.eventStartDate.slice(0, 2))
+  const eventEndDay: Number = parseInt(calendar_post.event.eventEndDate.slice(0, 2))
+  const eventTitle: String = calendar_post.event.eventName
 
   function handleEventClick(){
-    window.location.href = "/calendar/1"
+    window.location.href = `/calendar/${calendar_post.uri}`
   }
 
   const setEventDays = 

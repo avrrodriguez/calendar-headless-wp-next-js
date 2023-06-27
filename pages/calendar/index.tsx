@@ -12,7 +12,10 @@ type typeOfEventType = {
 
 export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.Element {
   // console.log(calendar_posts[0].uri)
-  useEffect(()=>SetEventDays(), [])
+  calendar_posts.map((calendar_post: EventType) => {
+    useEffect(()=>SetEventDays(calendar_post), [])
+  })
+
   return (
     <div>
       <CalendarAllMonths />

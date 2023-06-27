@@ -1,12 +1,10 @@
 import { EventType } from "types/graphql/graphql" 
-import { client } from "../lib/apollo";
-import { gql } from "@apollo/client";
 
 type typeOfEvent = {
-  event: EventType
+  calendar_event: EventType
 }
 
-export default function EventPage({ event }: typeOfEvent): JSX.Element {
+export default function EventPage({ calendar_event }: typeOfEvent): JSX.Element {
   return (
     <div>
       <h1>
