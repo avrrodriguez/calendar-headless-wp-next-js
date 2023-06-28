@@ -1,6 +1,5 @@
 import CalendarMonth from "./CalendarMonth"
 import { dateMonthYear } from "types/graphql/graphql";
-import ChangeMonth from "components/ChangeMonth"
 
 export default function CalendarAllMonths(): JSX.Element {
 
@@ -8,6 +7,8 @@ export default function CalendarAllMonths(): JSX.Element {
     month: "May",
     year: "2023"
   }
+
+  function ChangeMonth(){}
 
   return (
     <div style={{backgroundColor: "#967bb6", height: "100vh"}} >
@@ -22,7 +23,7 @@ export default function CalendarAllMonths(): JSX.Element {
             }}
         >
           <h1>Calendar</h1>
-          <ChangeMonth month={dateMonthYear.month} />
+          <div className="changeMonth" style={{}}></div>
         </div>
         <CalendarMonth month={dateMonthYear.month} year={dateMonthYear.year}></CalendarMonth>;
     </div>
