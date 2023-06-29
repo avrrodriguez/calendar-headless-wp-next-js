@@ -3,7 +3,7 @@ import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 
 type typeOfCalendarDays = {
   month: String
-  year: String
+  year: Number
 }
 
 export function SetCalendarDays({month, year}: typeOfCalendarDays): JSX.Element {

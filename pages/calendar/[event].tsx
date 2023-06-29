@@ -8,7 +8,7 @@ type typeOfEvent = {
 }
 
 export default function SlugPage({ calendar_event }: typeOfEvent): JSX.Element {
-  console.log(calendar_event.event.eventName)
+  // console.log(calendar_event.event.eventName)
   return (
     <div>
       <EventPage calendar_event={calendar_event}></EventPage>

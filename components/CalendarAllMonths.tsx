@@ -1,12 +1,13 @@
 import CalendarMonth from "./CalendarMonth"
 import { dateMonthYear } from "types/graphql/graphql";
+import { useState } from "react";
 
 export default function CalendarAllMonths(): JSX.Element {
+  const [monthIndex, setMonthIndex] = useState(5)
+  const [currYear, setCurrYear] = useState(2023)
 
-  const dateMonthYear: dateMonthYear = {
-    month: "May",
-    year: "2023"
-  }
+  const monthArray: String[] = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+
 
   function ChangeToPastMonth(){
     console.log("past month")
@@ -42,11 +43,11 @@ export default function CalendarAllMonths(): JSX.Element {
             }}
             >
             <button className="left-click" onClick={ChangeToPastMonth}>←</button>
-            <p>Current Month: {dateMonthYear.month}</p>
+            <p>Current Month: {monthArray[monthIndex]}</p>
             <button className="right-click" onClick={ChangeToFutureMonth}>→</button>
           </div>
         </div>
-        <CalendarMonth month={dateMonthYear.month} year={dateMonthYear.year}></CalendarMonth>;
+        <CalendarMonth month={monthArray[monthIndex]} year={currYear}></CalendarMonth>;
     </div>
   )
 }

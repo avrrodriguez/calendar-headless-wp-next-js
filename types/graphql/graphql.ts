@@ -37,5 +37,5 @@ export type EventType = {
 
 export type dateMonthYear = {
   month?: String,
-  year?: String
+  year?: Number
 }
