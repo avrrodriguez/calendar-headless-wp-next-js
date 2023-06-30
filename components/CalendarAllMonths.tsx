@@ -1,20 +1,24 @@
 import CalendarMonth from "./CalendarMonth"
-import { dateMonthYear } from "types/graphql/graphql";
 import { useState } from "react";
 
 export default function CalendarAllMonths(): JSX.Element {
-  const [monthIndex, setMonthIndex] = useState(5)
-  const [currYear, setCurrYear] = useState(2023)
+  const [monthIndex, setMonthIndex] = useState(Number)
+  const [currYear, setCurrYear] = useState(Number)
 
   const monthArray: String[] = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 
+  // https://stackoverflow.com/questions/28314368/how-to-maintain-state-after-a-page-refresh-in-react-js
+  // use local storage to store changing values and then set usestate to be whats in the localstorage
+  // is local storage empty get current month/year
 
-  function ChangeToPastMonth(){
-    console.log("past month")
+  function ChangeToPastMonth(){    
+    monthIndex == 0 ? setMonthIndex(11) : setMonthIndex(monthIndex-1)
+    // window.location = window.location
+    window.top.location = window.top.location
   }
 
   function ChangeToFutureMonth(){
-    console.log("future month")
+    monthIndex == 11 ? (setMonthIndex(0), setCurrYear(currYear+1)) : setMonthIndex(monthIndex+1)
   }
 
   return (
