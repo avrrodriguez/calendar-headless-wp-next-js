@@ -1,5 +1,5 @@
 import CalendarMonth from "./CalendarMonth"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 export default function CalendarAllMonths(): JSX.Element {
   
@@ -11,13 +11,14 @@ export default function CalendarAllMonths(): JSX.Element {
   function setStorageMonthIndex() {
     const timeNow = new Date()
     const currentMonth = timeNow.getMonth()
+    
     if (sessionStorage.getItem("month-num")) {
       setMonthIndex(parseInt(sessionStorage.getItem("month-num")))
+
     } else {
       sessionStorage.setItem("month-num", currentMonth.toString())
     }
 
-    console.log(sessionStorage.getItem("month-num"))
   }
 
   function setStorageYear(){
@@ -26,10 +27,10 @@ export default function CalendarAllMonths(): JSX.Element {
 
     if (sessionStorage.getItem("curr-year")) {
       setCurrYear(parseInt(sessionStorage.getItem("curr-year")))
+
     } else {
       sessionStorage.setItem("curr-year", currentYear.toString())
     }
-    console.log(sessionStorage.getItem("curr-year"))
   }
 
   function ChangeToPastMonth(){    
@@ -58,8 +59,8 @@ export default function CalendarAllMonths(): JSX.Element {
     window.top.location = window.top.location
   }
   
-  useEffect(()=>{setStorageMonthIndex()}, [])
-  useEffect(()=>{setStorageYear()}, [])
+  useLayoutEffect(()=>{setStorageMonthIndex()}, [])
+  useLayoutEffect(()=>{setStorageYear()}, [])
 
   return (
     <div className="container" style={{backgroundColor: "#967bb6", height: "100vh"}} >
@@ -87,7 +88,7 @@ export default function CalendarAllMonths(): JSX.Element {
             }}
             >
             <button className="left-click" onClick={ChangeToPastMonth}>←</button>
-            <p>Current Month: {monthArray[monthIndex]}</p>
+            <p> {monthArray[monthIndex].toUpperCase()} {currYear} </p>
             <button className="right-click" onClick={ChangeToFutureMonth}>→</button>
           </div>
         </div>

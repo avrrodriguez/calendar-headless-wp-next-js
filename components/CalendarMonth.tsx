@@ -3,7 +3,7 @@ import { WeekDays } from "./WeekDays";
 import { SetCalendarDays } from "./SetCalendarDays";
 
 export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Element {
-
+  console.log(month)
   return (
     <div>
         <WeekDays></WeekDays>
