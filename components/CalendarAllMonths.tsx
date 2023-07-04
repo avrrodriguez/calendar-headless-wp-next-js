@@ -2,28 +2,27 @@ import CalendarMonth from "./CalendarMonth"
 import { useState, useEffect, useLayoutEffect } from "react";
 
 export default function CalendarAllMonths(): JSX.Element {
-  
   const [monthIndex, setMonthIndex] = useState(0)
   const [currYear, setCurrYear] = useState(2023)
 
   const monthArray: String[] = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 
-  function setStorageMonthIndex() {
-    const timeNow = new Date()
-    const currentMonth = timeNow.getMonth()
+  function setStorageMonthIndex(): void {
+    const timeNow: Date = new Date()
+    const currentMonth: number = timeNow.getMonth()
     
     if (sessionStorage.getItem("month-num")) {
-      setMonthIndex(parseInt(sessionStorage.getItem("month-num")))
+        setMonthIndex(parseInt(sessionStorage?.getItem("month-num")))
 
     } else {
-      sessionStorage.setItem("month-num", currentMonth.toString())
+      sessionStorage?.setItem("month-num", currentMonth.toString())
     }
 
   }
 
-  function setStorageYear(){
-    const timeNow = new Date()
-    const currentYear = timeNow.getFullYear()
+  function setStorageYear(): void {
+    const timeNow: Date = new Date()
+    const currentYear: number = timeNow.getFullYear()
 
     if (sessionStorage.getItem("curr-year")) {
       setCurrYear(parseInt(sessionStorage.getItem("curr-year")))
@@ -33,8 +32,8 @@ export default function CalendarAllMonths(): JSX.Element {
     }
   }
 
-  function ChangeToPastMonth(){    
-    var newMonth = 0
+  function ChangeToPastMonth(): void {    
+    var newMonth: number = 0
     if (monthIndex == 0) {
       newMonth = 11
       sessionStorage.setItem("curr-year", (currYear-1).toString())
@@ -46,8 +45,8 @@ export default function CalendarAllMonths(): JSX.Element {
     window.top.location = window.top.location
   }
   
-  function ChangeToFutureMonth(){
-    var newMonth = 0
+  function ChangeToFutureMonth(): void {
+    var newMonth: number = 0
     if (monthIndex == 11) {
       newMonth = 0
       sessionStorage.setItem("curr-year", (currYear+1).toString())
@@ -59,8 +58,11 @@ export default function CalendarAllMonths(): JSX.Element {
     window.top.location = window.top.location
   }
   
-  useLayoutEffect(()=>{setStorageMonthIndex()}, [])
+  useLayoutEffect(()=>{
+    setStorageMonthIndex()
+  }, [monthIndex])
   useLayoutEffect(()=>{setStorageYear()}, [])
+
 
   return (
     <div className="container" style={{backgroundColor: "#967bb6", height: "100vh"}} >
