@@ -34,18 +34,18 @@ export default function CalendarAllMonths({ calendar_posts }: typeOfCalendarPost
 
   console.log(monthArray[monthIndex], currYear)
 
-  let currYearPosts = calendar_posts
+  calendar_posts
   .filter((calendar_post)=>
     (parseInt(calendar_post.event.eventStartDate.slice(6, 10)) || parseInt(calendar_post.event.eventEndDate.slice(6, 10))) === currYear
   )
-  let currMonthPosts = currYearPosts.filter((calendar_post)=>
-    (parseInt(calendar_post.event.eventStartDate.slice(3, 5)) || parseInt(calendar_post.event.eventEndDate.slice(3, 5))) === (monthIndex - 1)
+  .filter((calendar_post)=>
+    (parseInt(calendar_post.event.eventStartDate.slice(3, 5)) || parseInt(calendar_post.event.eventEndDate.slice(3, 5))) === (monthIndex + 1)
   )
-  console.log(currMonthPosts)
-  calendar_posts.map((calendar_post: EventType) => {
-      useEffect(()=>SetEventDays(calendar_post), [])
+  .map((calendar_post: EventType) => {
+    console.log("here")
+    SetEventDays(calendar_post)
   })
-
+  
   return (
     <div className="container" style={{backgroundColor: "#967bb6", height: "100vh"}} >
         <div
