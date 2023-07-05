@@ -2,8 +2,6 @@ import CalendarAllMonths from "components/CalendarAllMonths"
 import { EventType } from "types/graphql/graphql"
 import { client } from "lib/apollo";
 import { gql } from "@apollo/client";
-import SetEventDays from "helpers/SetEventDays"
-import { useEffect } from "react"
 
 type typeOfEventType = {
   calendar_posts: EventType[]
@@ -11,14 +9,10 @@ type typeOfEventType = {
 
 
 export default function CalendarPage({ calendar_posts }: typeOfEventType): JSX.Element {
-  // console.log(calendar_posts[0].uri)
-  calendar_posts.map((calendar_post: EventType) => {
-    useEffect(()=>SetEventDays(calendar_post), [])
-  })
 
   return (
     <div>
-      <CalendarAllMonths />
+      <CalendarAllMonths calendar_posts={calendar_posts}/>
     </div>
   )
 }
