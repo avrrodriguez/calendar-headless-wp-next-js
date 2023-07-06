@@ -7,8 +7,10 @@ type typeOfCalendarPosts = {
 }
 
 export default function CalendarAllMonths({ calendar_posts }: typeOfCalendarPosts): JSX.Element {
-  const [monthIndex, setMonthIndex] = useState(0)
-  const [currYear, setCurrYear] = useState(2023)
+  const currDate: Date = new Date()
+
+  const [monthIndex, setMonthIndex] = useState(currDate.getMonth())
+  const [currYear, setCurrYear] = useState(currDate.getFullYear())
 
   const monthArray: String[] = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 

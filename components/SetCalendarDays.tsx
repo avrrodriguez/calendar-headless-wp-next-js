@@ -14,6 +14,7 @@ export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Eleme
     [...Array(6).keys()].map((row) => {
       [...Array(7).keys()].map((col)=>{
           const calendarDay = document.getElementById(`col-${col}-row-${row}`)
+
           if (((col >= startMonthDay && row == 0) || row > 0) && day <= endMonthDay) {
             calendarDay.innerText = day.toString()
             day++
@@ -22,7 +23,6 @@ export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Eleme
             calendarDay.textContent = ""
             calendarDay.style.backgroundColor = "gray"
           }
-        
       })
     })
 
@@ -34,7 +34,6 @@ export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Eleme
       (parseInt(calendar_post.event.eventStartDate.slice(3, 5)) || parseInt(calendar_post.event.eventEndDate.slice(3, 5))) === (date.getMonth() + 1)
     )
     .map((calendar_post: EventType) => {
-      console.log("here 2")
       SetEventDays(calendar_post)
     })
   }
