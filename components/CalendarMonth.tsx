@@ -1,8 +1,8 @@
-import { dateMonthYear } from "types/graphql/graphql"
+import { datePlusEvent } from "types/graphql/graphql"
 import { WeekDays } from "./WeekDays";
 import { SetCalendarDays } from "./SetCalendarDays";
 
-export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Element {
+export default function CalendarMonth({ month, year, events }: datePlusEvent): JSX.Element {
   return (
     <div>
         <WeekDays></WeekDays>
@@ -19,8 +19,7 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
                       style={{
                         border: "2px solid gray", 
                         height: "100px", 
-                        width: "110px", 
-                        backgroundColor: "white"
+                        width: "110px"
                       }} 
                       id={`col-${col}-row-${row}`} 
                       key={`col-${col}-row-${row}`}
@@ -28,6 +27,7 @@ export default function CalendarMonth({ month, year }: dateMonthYear): JSX.Eleme
                         <SetCalendarDays 
                           month={month} 
                           year={year}
+                          events={events}
                         ></SetCalendarDays>
                       
                       </div>

@@ -35,7 +35,8 @@ export type EventType = {
   title: String
 }
 
-export type dateMonthYear = {
+export type datePlusEvent = {
   month?: String,
-  year?: Number
+  year?: number,
+  events: EventType[]
 }

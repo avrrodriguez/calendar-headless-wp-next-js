@@ -1,7 +1,6 @@
 import CalendarMonth from "./CalendarMonth"
-import SetEventDays from "helpers/SetEventDays"
 import { EventType } from "types/graphql/graphql"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 type typeOfCalendarPosts = {
   calendar_posts: EventType[]
@@ -31,20 +30,6 @@ export default function CalendarAllMonths({ calendar_posts }: typeOfCalendarPost
       setMonthIndex(monthIndex + 1)
     }
   }
-
-  console.log(monthArray[monthIndex], currYear)
-
-  calendar_posts
-  .filter((calendar_post)=>
-    (parseInt(calendar_post.event.eventStartDate.slice(6, 10)) || parseInt(calendar_post.event.eventEndDate.slice(6, 10))) === currYear
-  )
-  .filter((calendar_post)=>
-    (parseInt(calendar_post.event.eventStartDate.slice(3, 5)) || parseInt(calendar_post.event.eventEndDate.slice(3, 5))) === (monthIndex + 1)
-  )
-  .map((calendar_post: EventType) => {
-    console.log("here")
-    SetEventDays(calendar_post)
-  })
   
   return (
     <div className="container" style={{backgroundColor: "#967bb6", height: "100vh"}} >
@@ -76,7 +61,7 @@ export default function CalendarAllMonths({ calendar_posts }: typeOfCalendarPost
             <button className="right-click" onClick={ChangeToFutureMonth}>→</button>
           </div>
         </div>
-        <CalendarMonth month={monthArray[monthIndex]} year={currYear}></CalendarMonth>;
+        <CalendarMonth month={monthArray[monthIndex]} year={currYear} events={calendar_posts} ></CalendarMonth>;
     </div>
   )
 }
