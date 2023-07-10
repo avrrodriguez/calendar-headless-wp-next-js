@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 import { dateDateIdAndEvents, EventType } from "types/graphql/graphql"
-import SetEventDays from "components/SetEventDays"
-import filterEvents from "helpers/filterEvents"
 
 export function SetCalendarDays({month, year, calendarDayId, day, events}: dateDateIdAndEvents): JSX.Element {
   const date: Date = new Date(`${month} 1, ${year}`)
   const startMonthDay: number = date.getDay()
   var endMonthDay = GetCalendarMonthDays(`${month}`)
-
-  console.log(startMonthDay, endMonthDay)
   
   function displayDay() {
     
@@ -26,12 +22,8 @@ export function SetCalendarDays({month, year, calendarDayId, day, events}: dateD
       calendarDay.textContent = ""
       calendarDay.style.backgroundColor = "gray"
     }
-
-    // filterEvents(month, year, events).map((calendar_post: EventType) => {
-    //   SetEventDays(calendar_post)
-    // })
   }
-  useEffect(() => {displayDay()}, [])
+  useEffect(() => {displayDay()}, [month])
 
   return (
     <div></div>
