@@ -1,18 +1,20 @@
-import { datePlusEvent } from "types/graphql/graphql"
+import { dateDateIdAndEvents } from "types/graphql/graphql"
 import { WeekDays } from "./WeekDays";
 import { SetCalendarDays } from "./SetCalendarDays";
 
-export default function CalendarMonth({ month, year, events }: datePlusEvent): JSX.Element {
+export default function CalendarMonth({ month, year, events }: dateDateIdAndEvents): JSX.Element {
+  var day: number = 0
   return (
     <div>
         <WeekDays></WeekDays>
-        <div className="calendar-boxes" style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)", justifyItems: "center"}}>
+        <div className="calendar-boxes" style={{display: "grid", justifyItems: "center"}}>
         {
-          [...Array(7).keys()].map((col) => {
+          [...Array(6).keys()].map((col) => {
             return(
-              <div className="col" style={{display: "grid"}} id={`col-${col}`} key={`col-${col}`}>
+              <div className="col" style={{display: "grid", gridTemplateColumns: "repeat(7, 1fr)"}} id={`col-${col}`} key={`col-${col}`}>
                  {
-                  [...Array(6).keys()].map((row)=>{
+                   [...Array(7).keys()].map((row)=>{
+                    day++
                     return(
                       <div 
                       className="row" 
@@ -27,12 +29,15 @@ export default function CalendarMonth({ month, year, events }: datePlusEvent): J
                         <SetCalendarDays 
                           month={month} 
                           year={year}
+                          calendarDayId={`col-${col}-row-${row}`}
+                          day={day}
                           events={events}
                         ></SetCalendarDays>
                       
                       </div>
                     )
-                  })
+                  }
+                  )
                  } 
               </div>
             )

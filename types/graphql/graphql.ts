@@ -35,8 +35,10 @@ export type EventType = {
   title: String
 }
 
-export type datePlusEvent = {
+export type dateDateIdAndEvents = {
   month?: String,
   year?: number,
+  calendarDayId?: string,
+  day?: number,
   events: EventType[]
 }

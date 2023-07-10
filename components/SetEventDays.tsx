@@ -1,6 +1,6 @@
 import { EventType } from "types/graphql/graphql"
 
-export default function SetEventDays(calendar_post: EventType): void {
+export default function SetEventDays(calendar_post: EventType): JSX.Element {
 
   const eventStartDay: Number = parseInt(calendar_post.event.eventStartDate.slice(0, 2))
   const eventEndDay: Number = parseInt(calendar_post.event.eventEndDate.slice(0, 2))
@@ -28,4 +28,8 @@ export default function SetEventDays(calendar_post: EventType): void {
       }
     })
   })
+
+  return (
+    <div></div>
+  )
 }

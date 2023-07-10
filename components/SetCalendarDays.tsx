@@ -1,38 +1,37 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
-import { datePlusEvent, EventType } from "types/graphql/graphql"
-import SetEventDays from "helpers/SetEventDays"
+import { dateDateIdAndEvents, EventType } from "types/graphql/graphql"
+import SetEventDays from "components/SetEventDays"
 import filterEvents from "helpers/filterEvents"
 
-export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Element {
-
+export function SetCalendarDays({month, year, calendarDayId, day, events}: dateDateIdAndEvents): JSX.Element {
   const date: Date = new Date(`${month} 1, ${year}`)
-  const startMonthDay: Number = date.getDay()
+  const startMonthDay: number = date.getDay()
   var endMonthDay = GetCalendarMonthDays(`${month}`)
-  var day = 1
+
+  console.log(startMonthDay, endMonthDay)
   
   function displayDay() {
-    [...Array(6).keys()].map((row) => {
-      [...Array(7).keys()].map((col)=>{
-          const calendarDay = document.getElementById(`col-${col}-row-${row}`)
+    
+    const col: number = parseInt(calendarDayId.slice(4, 5))
+    const row: number = parseInt(calendarDayId.slice(10, 11))
 
-          if (((col >= startMonthDay && row == 0) || row > 0) && day <= endMonthDay) {
-            calendarDay.innerText = day.toString()
-            day++
-            calendarDay.style.backgroundColor = "white"
-          } else {
-            calendarDay.textContent = ""
-            calendarDay.style.backgroundColor = "gray"
-          }
-      })
-    })
+    const calendarDay = document.getElementById(`col-${col}-row-${row}`)
+  
+    if (((row >= startMonthDay && col == 0) || col > 0) && (day - startMonthDay) <= endMonthDay) {
+      var dayInCalendar = day - startMonthDay
+      calendarDay.innerText = dayInCalendar.toString()
+      calendarDay.style.backgroundColor = "white"
+    } else {
+      calendarDay.textContent = ""
+      calendarDay.style.backgroundColor = "gray"
+    }
 
-    filterEvents(month, year, events).map((calendar_post: EventType) => {
-      SetEventDays(calendar_post)
-    })
+    // filterEvents(month, year, events).map((calendar_post: EventType) => {
+    //   SetEventDays(calendar_post)
+    // })
   }
-
-  useEffect(() => {displayDay()})
+  useEffect(() => {displayDay()}, [])
 
   return (
     <div></div>
