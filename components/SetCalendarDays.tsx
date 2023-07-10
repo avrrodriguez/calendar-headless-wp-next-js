@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
 import { datePlusEvent, EventType } from "types/graphql/graphql"
 import SetEventDays from "helpers/SetEventDays"
+import filterEvents from "helpers/filterEvents"
 
 export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Element {
 
@@ -26,14 +27,7 @@ export function SetCalendarDays({month, year, events}: datePlusEvent): JSX.Eleme
       })
     })
 
-    events
-    .filter((calendar_post)=>
-      (parseInt(calendar_post.event.eventStartDate.slice(6, 10)) || parseInt(calendar_post.event.eventEndDate.slice(6, 10))) === year
-    )
-    .filter((calendar_post)=>
-      (parseInt(calendar_post.event.eventStartDate.slice(3, 5)) || parseInt(calendar_post.event.eventEndDate.slice(3, 5))) === (date.getMonth() + 1)
-    )
-    .map((calendar_post: EventType) => {
+    filterEvents(month, year, events).map((calendar_post: EventType) => {
       SetEventDays(calendar_post)
     })
   }

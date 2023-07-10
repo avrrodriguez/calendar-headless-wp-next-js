@@ -39,7 +39,6 @@ export default function CalendarMonth({ month, year, events }: datePlusEvent): J
           })
         }
         </div>
-
     </div>
   )
   }
