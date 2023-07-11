@@ -1,6 +1,7 @@
 import { dateDateIdAndEvents } from "types/graphql/graphql"
 import { WeekDays } from "./WeekDays";
 import { SetCalendarDays } from "./SetCalendarDays";
+import SetEventDays from "./SetEventDays";
 
 export default function CalendarMonth({ month, year, events }: dateDateIdAndEvents): JSX.Element {
   var calendarCellNumber: number = 0
@@ -29,10 +30,15 @@ export default function CalendarMonth({ month, year, events }: dateDateIdAndEven
                         <SetCalendarDays 
                           month={month} 
                           year={year}
-                          calendarDayId={`col-${col}-row-${row}`}
+                          calendarDayElementId={`col-${col}-row-${row}`}
                           calendarCellNumber={calendarCellNumber}
-                        ></SetCalendarDays>
-                      
+                        />
+                        <SetEventDays
+                          year={year}
+                          month={month}
+                          calendarCellNumber={calendarCellNumber}
+                          events={events}
+                        />
                       </div>
                     )
                   }
