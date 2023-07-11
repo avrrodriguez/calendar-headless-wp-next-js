@@ -39,6 +39,6 @@ export type dateDateIdAndEvents = {
   month?: String,
   year?: number,
   calendarDayId?: string,
-  day?: number,
-  events: EventType[]
+  calendarCellNumber?: number,
+  events?: EventType[]
 }

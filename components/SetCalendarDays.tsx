@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import GetCalendarMonthDays from "helpers/GetCalendarMonthDays"
-import { dateDateIdAndEvents, EventType } from "types/graphql/graphql"
+import { dateDateIdAndEvents } from "types/graphql/graphql"
 
-export function SetCalendarDays({month, year, calendarDayId, day, events}: dateDateIdAndEvents): JSX.Element {
+export function SetCalendarDays({month, year, calendarDayId, calendarCellNumber}: dateDateIdAndEvents): JSX.Element {
   const date: Date = new Date(`${month} 1, ${year}`)
   const startMonthDay: number = date.getDay()
   var endMonthDay = GetCalendarMonthDays(`${month}`)
+  var calendarDayNumber = calendarCellNumber - startMonthDay
   
   function displayDay() {
     
@@ -14,9 +15,8 @@ export function SetCalendarDays({month, year, calendarDayId, day, events}: dateD
 
     const calendarDay = document.getElementById(`col-${col}-row-${row}`)
   
-    if (((row >= startMonthDay && col == 0) || col > 0) && (day - startMonthDay) <= endMonthDay) {
-      var dayInCalendar = day - startMonthDay
-      calendarDay.innerText = dayInCalendar.toString()
+    if (((row >= startMonthDay && col == 0) || col > 0) && (calendarDayNumber <= endMonthDay)) {
+      calendarDay.innerText = calendarDayNumber.toString()
       calendarDay.style.backgroundColor = "white"
     } else {
       calendarDay.textContent = ""
