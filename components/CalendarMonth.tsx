@@ -1,9 +1,10 @@
-import { dateDateIdAndEvents } from "types/graphql/graphql"
+import { dateDateIdAndEvents, EventType } from "types/graphql/graphql"
 import { WeekDays } from "./WeekDays";
 import { SetCalendarDays } from "./SetCalendarDays";
-import SetEventDays from "./SetEventDays";
+import filterEvents from "helpers/filterEvents";
 
 export default function CalendarMonth({ month, year, events }: dateDateIdAndEvents): JSX.Element {
+  const filteredEvents: EventType[] = filterEvents(month, year, events)
   var calendarCellNumber: number = 0
   return (
     <div>
@@ -32,12 +33,7 @@ export default function CalendarMonth({ month, year, events }: dateDateIdAndEven
                           year={year}
                           calendarDayElementId={`col-${col}-row-${row}`}
                           calendarCellNumber={calendarCellNumber}
-                        />
-                        <SetEventDays
-                          year={year}
-                          month={month}
-                          calendarCellNumber={calendarCellNumber}
-                          events={events}
+                          events={filteredEvents}
                         />
                       </div>
                     )
