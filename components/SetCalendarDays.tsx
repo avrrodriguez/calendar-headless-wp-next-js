@@ -6,7 +6,7 @@ import SetEventDays from "./SetEventDays"
 export function SetCalendarDays({month, year, calendarDayElementId, calendarCellNumber, events}: dateDateIdAndEvents): JSX.Element {
   const date: Date = new Date(`${month} 1, ${year}`)
   const startMonthDay: number = date.getDay()
-  var calendarDayNumber = calendarCellNumber - startMonthDay
+  const calendarDayNumber = calendarCellNumber - startMonthDay
   var endMonthDay = GetCalendarMonthDays(`${month}`)
   
   const col: number = parseInt(calendarDayElementId.slice(4, 5))
@@ -14,25 +14,27 @@ export function SetCalendarDays({month, year, calendarDayElementId, calendarCell
   
   const eventsOfTheDay = events
   .filter((calendarEvent) => 
-  parseInt(calendarEvent.event.eventStartDate) >= calendarDayNumber || parseInt(calendarEvent.event.eventEndDate) <= calendarDayNumber)
+  parseInt(calendarEvent.event.eventStartDate) <= calendarDayNumber && parseInt(calendarEvent.event.eventEndDate) >= calendarDayNumber)
+
+  const isCalendarDay: boolean = calendarDayNumber > 0 && calendarDayNumber <= endMonthDay
+  const isDayOfEvent: boolean = eventsOfTheDay.length > 0
 
   function displayDay() {
     const calendarDay = document.getElementById(`col-${col}-row-${row}`)
     
     if (((row >= startMonthDay && col == 0) || col > 0) && (calendarDayNumber <= endMonthDay)) {
-      calendarDay.innerText = `${calendarDayNumber}`
       calendarDay.style.backgroundColor = "white"
     } else {
-      calendarDay.textContent = ""
       calendarDay.style.backgroundColor = "gray"
     }
-
-    if(eventsOfTheDay.length > 0) {SetEventDays(eventsOfTheDay)}
   }
+
   useEffect(() => {displayDay()}, [month])
 
   return (
-    <div>
+    <div style={{}}>
+      {isCalendarDay ? (calendarDayNumber) : ""}
+      {isDayOfEvent ? (<div><SetEventDays events={eventsOfTheDay}/></div>) : <></>}
     </div>
   )
 }
